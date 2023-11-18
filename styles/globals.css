@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out,
+    fill 200ms ease-in-out;
+}
+
+:root {
+  --background: #fbfbfb;
+  --primary: #232323;
+  --primary-op: #23232360;
+  --accent: #5c4dff;
+  --error: #ff4d4d;
+}
+
+.dark-theme {
+  --background: #232323;
+  --primary: #fbfbfb;
+  --primary-op: #fbfbfb60;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: var(--background);
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out,
+    fill 200ms ease-in-out;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border: 6px solid var(--background);
+  border-radius: 16px;
+  transition: color 200ms ease-in-out, background-color 200ms ease-in-out,
+    fill 200ms ease-in-out;
+}
+
+.loading_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.loading_logo {
+  height: 64px;
+  animation: logoAnimation 1200ms linear infinite;
+}
+
+.loading_logo > svg {
+  height: 100%;
+  width: auto;
+}
+
+@keyframes logoAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
