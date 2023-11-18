@@ -19,6 +19,7 @@ export const Language = {
       eight: "Username...",
     },
     fetch: {
+      lang: "en-US",
       one: "Start",
       two: "exploring",
       three: "right now",
@@ -55,6 +56,7 @@ export const Language = {
       eight: "Nombre...",
     },
     fetch: {
+      lang: "es-ES",
       one: "Empieza a",
       two: "explorar",
       three: "ahora",
