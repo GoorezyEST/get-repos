@@ -1,95 +1,99 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
 
-export default function Home() {
+import { useGlobal } from "@/context/GlobalContext";
+import styles from "@/styles/modules/home.module.css";
+import { useEffect, useRef } from "react";
+import DecorativeSvg from "@/components/DecorativeSvg";
+import Navbar from "@/components/Units/Navbar";
+import SearchIconSvg from "@/components/SearchIconSvg";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import Footer from "@/components/Units/Footer";
+
+export default function Wrapper() {
+  const { setIsHydrated, setFetchUser, langSettings } = useGlobal();
+
+  useEffect(() => {
+    setIsHydrated(false);
+  }, []);
+
+  const {
+    register,
+    formState: { errors },
+    getFieldState,
+    handleSubmit,
+  } = useForm();
+
+  const formRef = useRef(null);
+
+  const router = useRouter();
+
+  const formSubmitFunction = (e: any) => {
+    setFetchUser(e.username);
+    router.push("/fetch-repositories");
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <main className={styles.wrapper}>
+        <Navbar />
+        <div className={styles.content}>
+          <div className={styles.left}>
+            <h1>
+              {langSettings.home.one} <span>{langSettings.home.two}</span>{" "}
+              {langSettings.home.three}
+            </h1>
+            <p>{langSettings.home.four}</p>
+            <form
+              autoComplete="off"
+              ref={formRef}
+              onSubmit={handleSubmit(formSubmitFunction)}
+            >
+              <label
+                htmlFor="username"
+                style={{
+                  color:
+                    errors.username?.type === "required" ||
+                    errors.username?.type === "pattern"
+                      ? "var(--error)"
+                      : "var(--accent)",
+                }}
+              >
+                {errors.username?.type === "required" && langSettings.home.five}
+                {errors.username?.type === "pattern" && langSettings.home.six}
+                {!errors.username &&
+                  getFieldState("username").isDirty &&
+                  langSettings.home.seven}
+                {!errors.username &&
+                  !getFieldState("username").isDirty &&
+                  langSettings.home.seven}
+              </label>
+              <div>
+                <input
+                  type="text"
+                  id="username"
+                  {...register("username", {
+                    required: true,
+                    pattern: /^[a-zA-Z0-9-]+$/,
+                  })}
+                  placeholder={langSettings.home.eight}
+                />
+                <button type="submit">
+                  <div>
+                    <SearchIconSvg />
+                  </div>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div className={styles.right}>
+            <div className={styles.right_decoration}>
+              <DecorativeSvg />
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+      </main>
+      <Footer />
+    </>
+  );
 }
