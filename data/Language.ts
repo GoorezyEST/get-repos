@@ -2,7 +2,7 @@ export const Language = {
   en: {
     navbar: {
       one: "Home",
-      two: "Get Repositories",
+      two: "Search Repositories",
     },
     footer: {
       one: "Developed by Franco Espinosa",
@@ -12,7 +12,7 @@ export const Language = {
       one: "Enter an username and discover",
       two: "GitHub",
       three: "repositories",
-      four: "Enhance your coding exploration by entering the GitHub username below. Our web app fetches and presents their repositories, providing you with a seamless and enriching way to discover, explore, and learn from their remarkable work.",
+      four: "Enhance your coding exploration by entering the GitHub username below. Get Repos fetches and presents their repositories, providing you with a seamless and enriching way to discover, explore, and learn from their remarkable work.",
       five: "You must enter a username",
       six: "Only alphanumeric characters and dashes",
       seven: "Enter an username below",
@@ -35,6 +35,16 @@ export const Language = {
       thirteen: "The username you entered does not exist!",
       fourteen: "Here you'll see the repositories of the user!",
     },
+    dropdown: {
+      one: "Filters",
+      two: "Newest",
+      three: "Oldest",
+      four: "More stars",
+      five: "Less stars",
+    },
+    loading: {
+      one: "Loading",
+    },
   },
   es: {
     navbar: {
@@ -46,12 +56,12 @@ export const Language = {
       two: "Potenciado por GitHub API",
     },
     home: {
-      one: "Descubra código de",
+      one: "Descubra repositorios de",
       two: "GitHub",
-      three: "solo con un nombre",
-      four: "Mejore a la hora de explorar codigo de otros desarrolladores. Nuestra aplicación web recupera y presenta sus repositorios, ofreciéndote una forma fluida y enriquecedora de descubrir, explorar y aprender de su extraordinario trabajo.",
+      three: "con solo un nombre",
+      four: "Mejore a la hora de explorar código de otros desarrolladores. Get Repos recupera y presenta sus repositorios, ofreciéndote una forma fluida y enriquecedora de descubrir, explorar y aprender de su extraordinario trabajo.",
       five: "Debes ingresar un nombre de usuario",
-      six: "Solo caracteres alfanumericos y guiones",
+      six: "Solo caracteres alfanúmericos y guiones",
       seven: "Ingrese un nombre de usuario debajo",
       eight: "Nombre...",
     },
@@ -61,7 +71,7 @@ export const Language = {
       two: "explorar",
       three: "ahora",
       four: "Debes ingresar un nombre de usuario",
-      five: "Solo caracteres alfanumericos y guiones",
+      five: "Solo caracteres alfanúmericos y guiones",
       six: "Ingrese un nombre de usuario debajo",
       seven: "Nombre...",
       eight: "de",
@@ -69,8 +79,18 @@ export const Language = {
       ten: "No hay una descripción disponible.",
       eleven: "Ver repositorio",
       twelve: "Ver perfil",
-      thirteen: "El nombre de usuario ingresado no existe!",
-      fourteen: "Aqui verás los repositorios del usuario!",
+      thirteen: "¡El nombre de usuario ingresado no existe!",
+      fourteen: "¡Aqui verás los repositorios del usuario!",
+    },
+    dropdown: {
+      one: "Filtros",
+      two: "Recientes",
+      three: "Antiguos",
+      four: "Más estrellas",
+      five: "Menos estrellas",
+    },
+    loading: {
+      one: "Cargando",
     },
   },
 };
