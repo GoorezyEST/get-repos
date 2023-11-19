@@ -15,6 +15,10 @@ import { formatDateToCountryFormat } from "@/functions/FormatDate";
 import LeftArrowSvg from "@/components/LeftArrowSvg";
 import RightArrowSvg from "@/components/RightArrowSvg";
 import Footer from "@/components/Units/Footer";
+import StarSvg from "@/components/StarSvg";
+import ErrorSvg from "@/components/ErrorSvg";
+import MessageSvg from "@/components/MessageSvg";
+import UpAndDownArrowSvg from "@/components/UpAndDownArrowSvg";
 
 function FetchReposPage() {
   const { setIsHydrated, fetchUser, setFetchUser, langSettings } = useGlobal();
@@ -90,6 +94,85 @@ function FetchReposPage() {
     setImgLoaded(true);
   };
 
+  const [dropdownState, setDropdownState] = useState<boolean>(false);
+
+  const [currentSort, setCurrentSort] = useState<string>("newest");
+
+  const handleSort = (param: string) => {
+    if (currentSort !== param) {
+      setCurrentSort(param);
+
+      switch (param) {
+        case "newest":
+          setData((prev) => {
+            if (prev) {
+              const sortedPrev = prev.sort((a, b) => {
+                const dateA = new Date(a.created_at).getTime();
+                const dateB = new Date(b.created_at).getTime();
+                return dateB - dateA;
+              });
+
+              return sortedPrev;
+            } else {
+              return prev;
+            }
+          });
+          setCurrentPage(1);
+          break;
+        case "oldest":
+          setData((prev) => {
+            if (prev) {
+              const sortedPrev = prev.sort((a, b) => {
+                const dateA = new Date(a.created_at).getTime();
+                const dateB = new Date(b.created_at).getTime();
+                return dateA - dateB;
+              });
+
+              return sortedPrev;
+            } else {
+              return prev;
+            }
+          });
+          setCurrentPage(1);
+          break;
+        case "more-stars":
+          setData((prev) => {
+            if (prev) {
+              const sortedPrev = prev.sort((a, b) => {
+                const starsA = a.stargazers_count;
+                const starsB = b.stargazers_count;
+                return starsB - starsA;
+              });
+
+              return sortedPrev;
+            } else {
+              return prev;
+            }
+          });
+          break;
+          setCurrentPage(1);
+        case "less-stars":
+          setData((prev) => {
+            if (prev) {
+              const sortedPrev = prev.sort((a, b) => {
+                const starsA = a.stargazers_count;
+                const starsB = b.stargazers_count;
+                return starsA - starsB;
+              });
+
+              return sortedPrev;
+            } else {
+              return prev;
+            }
+          });
+          setCurrentPage(1);
+          break;
+      }
+    } else {
+      return;
+    }
+  };
+
   return (
     <>
       <main className={styles.wrapper}>
@@ -147,20 +230,73 @@ function FetchReposPage() {
             </div>
 
             {data && data.length > 0 && (
-              <div className={styles.search_pagination}>
-                <button onClick={goToPrevPage} disabled={currentPage === 1}>
-                  <LeftArrowSvg />
-                </button>
-                <span>{currentPage}</span>
-                <span>{langSettings.fetch.eight}</span>
-                <span>{totalPages}</span>
-                <button
-                  onClick={goToNextPage}
-                  disabled={currentPage === totalPages}
+              <ul className={styles.search_sort}>
+                <li
+                  onClick={() => {
+                    setDropdownState((prev) => !prev);
+                  }}
                 >
-                  <RightArrowSvg />
-                </button>
-              </div>
+                  {langSettings.dropdown.one}
+                  <div
+                    style={{
+                      transform: dropdownState
+                        ? "rotate(-180deg)"
+                        : "rotate(0deg)",
+                    }}
+                  >
+                    <UpAndDownArrowSvg />
+                  </div>
+                </li>
+                <ul
+                  className={styles.search_sort_dropdown}
+                  style={{ transform: dropdownState ? "scale(1)" : "scale(0)" }}
+                >
+                  <li
+                    style={{
+                      backgroundColor:
+                        currentSort === "newest"
+                          ? "var(--dropdown-item-hover)"
+                          : "",
+                    }}
+                    onClick={() => handleSort("newest")}
+                  >
+                    {langSettings.dropdown.two}
+                  </li>
+                  <li
+                    style={{
+                      backgroundColor:
+                        currentSort === "oldest"
+                          ? "var(--dropdown-item-hover)"
+                          : "",
+                    }}
+                    onClick={() => handleSort("oldest")}
+                  >
+                    {langSettings.dropdown.three}
+                  </li>
+                  <li
+                    style={{
+                      backgroundColor:
+                        currentSort === "more-stars"
+                          ? "var(--dropdown-item-hover)"
+                          : "",
+                    }}
+                    onClick={() => handleSort("more-stars")}
+                  >
+                    {langSettings.dropdown.four}
+                  </li>
+                  <li
+                    style={{
+                      backgroundColor:
+                        currentSort === "less-stars"
+                          ? "var(--dropdown-item-hover)"
+                          : "",
+                    }}
+                    onClick={() => handleSort("less-stars")}
+                  >
+                    {langSettings.dropdown.five}
+                  </li>
+                </ul>
+              </ul>
             )}
           </div>
           <div className={styles.results}>
@@ -197,6 +333,10 @@ function FetchReposPage() {
                                 ? item.description
                                 : langSettings.fetch.ten}
                             </p>
+                            <div className={styles.card_stars}>
+                              <StarSvg />
+                              <span>{item.stargazers_count}</span>
+                            </div>
                             <p className={styles.card_date}>
                               {formatDateToCountryFormat(
                                 item.created_at,
@@ -224,17 +364,39 @@ function FetchReposPage() {
                       );
                     })}
                 </div>
+                <div className={styles.bottom_pagination}>
+                  <div className={styles.bottom_pagination_content}>
+                    <button onClick={goToPrevPage} disabled={currentPage === 1}>
+                      <LeftArrowSvg />
+                    </button>
+                    <span>{currentPage}</span>
+                    <span>{langSettings.fetch.eight}</span>
+                    <span>{totalPages}</span>
+                    <button
+                      onClick={goToNextPage}
+                      disabled={currentPage === totalPages}
+                    >
+                      <RightArrowSvg />
+                    </button>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className={styles.results_empty}>
                 {!userExist ? (
-                  <p style={{ color: "var(--error)" }}>
-                    {langSettings.fetch.thirteen}
-                  </p>
+                  <div className={styles.not_found}>
+                    <ErrorSvg />
+                    <p style={{ color: "var(--error)" }}>
+                      {langSettings.fetch.thirteen}
+                    </p>
+                  </div>
                 ) : (
-                  <p style={{ color: "var(--primary)" }}>
-                    {langSettings.fetch.fourteen}
-                  </p>
+                  <div className={styles.welcome_text}>
+                    <MessageSvg />
+                    <p style={{ color: "var(--primary)" }}>
+                      {langSettings.fetch.fourteen}
+                    </p>
+                  </div>
                 )}
               </div>
             )}
