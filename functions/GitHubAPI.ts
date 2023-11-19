@@ -8,6 +8,7 @@ export interface GitHubRepository {
   description: string | null;
   html_url: string;
   created_at: string;
+  stargazers_count: number;
 }
 
 class RepositoriesRetrievalError extends Error {
@@ -41,8 +42,10 @@ export async function retrieveUserRepositories(username: string) {
   } catch (error) {
     if (error instanceof RepositoriesRetrievalError) {
       console.error(`Error retrieving user repositories: ${error.message}`);
+      return [];
     } else {
       console.error(`Unexpected error: ${error}`);
+      return [];
     }
     throw error;
   }
