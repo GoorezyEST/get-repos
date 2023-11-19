@@ -8,10 +8,15 @@
 
 :root {
   --background: #fbfbfb;
+  --background-op: #fbfbfb60;
   --primary: #232323;
   --primary-op: #23232360;
-  --accent: #5c4dff;
+  --accent: #325dd2;
+  --accent-darker: #2d57c9;
   --error: #ff4d4d;
+
+  --dropdown-item: #232323;
+  --dropdown-item-hover: #333333;
 }
 
 .dark-theme {
@@ -50,16 +55,26 @@ body::-webkit-scrollbar-thumb {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: var(--primary);
+  background-color: var(--background);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 32px;
   z-index: 1000;
+}
+
+.loading_container > span {
+  font-size: 16px;
+  line-height: calc(16px * 1.2);
+  color: var(--primary);
+  font-weight: 500;
+  animation: logoAnimation 1350ms linear infinite;
 }
 
 .loading_logo {
   height: 64px;
-  animation: logoAnimation 1200ms linear infinite;
+  animation: logoAnimation 1350ms linear infinite;
 }
 
 .loading_logo > svg {
