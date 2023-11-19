@@ -1,7 +1,7 @@
 .wrapper {
   width: 100%;
   height: auto;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,11 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 75;
+  height: 100%;
 }
 
 .left {
