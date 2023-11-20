@@ -14,6 +14,8 @@ export function GlobalProvider({ children }) {
   const [langSettings, setLangSettings] = useState(Language.es);
   //Visible selector
   const [lang, setLang] = useState(null);
+  //Show or hide overlay card for user profile details
+  const [showProfile, setShowProfile] = useState(false);
 
   //Function to swap themes
   const handleThemeChange = () => {
@@ -62,6 +64,8 @@ export function GlobalProvider({ children }) {
         lang,
         langSettings,
         swapLanguage,
+        showProfile,
+        setShowProfile,
       }}
     >
       {children}
