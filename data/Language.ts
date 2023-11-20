@@ -42,6 +42,13 @@ export const Language = {
       four: "More stars",
       five: "Less stars",
     },
+    profileCard: {
+      one: "Followers",
+      two: "Following",
+      three: "User since",
+      four: "See all",
+      five: "repositories",
+    },
     loading: {
       one: "Loading",
     },
@@ -88,6 +95,13 @@ export const Language = {
       three: "Antiguos",
       four: "Más estrellas",
       five: "Menos estrellas",
+    },
+    profileCard: {
+      one: "Seguidores",
+      two: "Siguiendo",
+      three: "Usuario desde",
+      four: "Ver los",
+      five: "repositorios",
     },
     loading: {
       one: "Cargando",
