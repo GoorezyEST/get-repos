@@ -1,0 +1,174 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  height: auto;
+  width: auto;
+  background-color: var(--background);
+  border: 1px solid var(--primary-op);
+  padding: 48px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card_image {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 82px;
+  height: 82px;
+  cursor: default;
+  user-select: none;
+}
+
+.card_image > img {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+}
+
+.card_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+  cursor: default;
+  user-select: none;
+}
+
+.card_title > h2 {
+  font-size: 24px;
+  line-height: calc(24px * 1.2);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.card_title > span {
+  font-size: 16px;
+  line-height: calc(16px * 1.2);
+  font-weight: 400;
+  color: var(--primary);
+  opacity: 0.75;
+}
+
+.card_stats {
+  display: flex;
+  width: 100%;
+  gap: 48px;
+  cursor: default;
+  user-select: none;
+}
+
+.card_stats_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.card_stats_item_icon {
+  height: 24px;
+  width: auto;
+}
+
+.card_stats_item_icon > svg {
+  height: 100%;
+  width: auto;
+  fill: var(--primary);
+}
+
+.card_stats_item > span {
+  font-size: 16px;
+  line-height: calc(16px * 1.2);
+  font-weight: 400;
+  color: var(--primary);
+}
+
+.card_stats_item > strong {
+  font-size: 16px;
+  line-height: calc(16px * 1.2);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.card_link {
+  font-size: 16px;
+  line-height: calc(16px * 1.2);
+  font-weight: 400;
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.card_link > span {
+  font-size: 16px;
+  line-height: calc(16px * 1.2);
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.card_loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background);
+  z-index: 1000;
+  cursor: default;
+  user-select: none;
+}
+
+.card_loading span {
+  width: 24px;
+  height: 24px;
+  border: 2px solid;
+  border-color: var(--accent) transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.card_close {
+  height: 32px;
+  width: 32px;
+  border: 1px solid var(--primary);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border-radius: 50%;
+  z-index: 750;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.5;
+  transition: opacity 200ms ease-in-out;
+  user-select: none;
+  cursor: pointer;
+}
+
+.card_close:hover {
+  opacity: 1;
+}
+
+.card_close > svg {
+  height: 24px;
+  width: 24px;
+}
