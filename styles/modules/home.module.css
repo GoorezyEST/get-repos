@@ -28,6 +28,8 @@
   font-weight: 700;
   line-height: calc(48px * 1.2);
   color: var(--primary);
+  cursor: default;
+  user-select: none;
 }
 
 .left > h1 > span {
@@ -40,6 +42,8 @@
   line-height: calc(16px * 1.575);
   color: var(--primary);
   margin: 32px 0 64px 0;
+  cursor: default;
+  user-select: none;
 }
 
 .left > form {
@@ -55,6 +59,8 @@
   line-height: calc(16px * 1.2);
   color: var(--accent);
   margin-bottom: 16px;
+  cursor: default;
+  user-select: none;
 }
 
 .left > form > div {
@@ -106,6 +112,8 @@
 .right {
   width: auto;
   height: auto;
+  cursor: default;
+  user-select: none;
 }
 
 .right_decoration > svg {
