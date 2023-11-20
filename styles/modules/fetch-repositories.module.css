@@ -32,6 +32,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  cursor: default;
+  user-select: none;
 }
 
 .search_main > h1 {
@@ -191,6 +193,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: default;
+  user-select: none;
 }
 
 .not_found,
@@ -229,6 +233,8 @@
   line-height: calc(24px * 1.2);
   color: var(--primary);
   margin-bottom: 24px;
+  cursor: default;
+  user-select: none;
 }
 
 .results_fill > h2 > span {
@@ -254,6 +260,8 @@
   width: 50px;
   height: 50px;
   position: relative;
+  cursor: default;
+  user-select: none;
 }
 
 .card_image img {
@@ -306,6 +314,8 @@
   font-weight: 600;
   color: var(--accent);
   line-height: calc(18px * 1.2);
+  cursor: default;
+  user-select: none;
 }
 
 .card_description {
@@ -318,6 +328,8 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   margin: 8px 0 8px 0;
+  cursor: default;
+  user-select: none;
 }
 
 .card_stars {
@@ -326,6 +338,8 @@
   justify-content: flex-start;
   gap: 8px;
   margin-bottom: 8px;
+  cursor: default;
+  user-select: none;
 }
 
 .card_stars > svg {
@@ -345,6 +359,8 @@
   color: var(--primary);
   line-height: calc(16px * 1.2);
   opacity: 0.5;
+  cursor: default;
+  user-select: none;
 }
 
 .card_links {
@@ -362,6 +378,8 @@
   text-decoration: none;
   opacity: 0.75;
   transition: opacity 200ms ease-in-out;
+  cursor: pointer;
+  user-select: none;
 }
 
 .card_link_profile {
@@ -371,6 +389,8 @@
   text-decoration: none;
   opacity: 0.75;
   transition: opacity 200ms ease-in-out;
+  cursor: pointer;
+  user-select: none;
 }
 
 .card_link_repo:hover,
@@ -389,6 +409,7 @@
   display: flex;
   align-items: center;
   gap: 24px;
+  user-select: none;
 }
 
 .bottom_pagination_content button {
@@ -416,4 +437,19 @@
   user-select: none;
   font-size: 16px;
   font-weight: 400;
+}
+
+/* OVERLAY STYLES */
+
+.card_container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: #23232360;
 }

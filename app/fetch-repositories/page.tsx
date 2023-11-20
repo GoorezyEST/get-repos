@@ -19,9 +19,18 @@ import StarSvg from "@/components/StarSvg";
 import ErrorSvg from "@/components/ErrorSvg";
 import MessageSvg from "@/components/MessageSvg";
 import UpAndDownArrowSvg from "@/components/UpAndDownArrowSvg";
+import ProfileCard from "@/components/Units/ProfileCard";
+import { AnimatePresence, motion } from "framer-motion";
 
 function FetchReposPage() {
-  const { setIsHydrated, fetchUser, setFetchUser, langSettings } = useGlobal();
+  const {
+    setIsHydrated,
+    fetchUser,
+    setFetchUser,
+    langSettings,
+    showProfile,
+    setShowProfile,
+  } = useGlobal();
 
   const {
     register,
@@ -88,7 +97,7 @@ function FetchReposPage() {
     }
   };
 
-  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgLoaded, setImgLoaded] = useState(true);
 
   const handleImgLoad = () => {
     setImgLoaded(true);
@@ -98,7 +107,9 @@ function FetchReposPage() {
 
   const [currentSort, setCurrentSort] = useState<string>("newest");
 
-  const handleSort = (param: string) => {
+  const handleSort = (param: string, event: React.MouseEvent) => {
+    event.stopPropagation();
+
     if (currentSort !== param) {
       setCurrentSort(param);
 
@@ -149,8 +160,8 @@ function FetchReposPage() {
               return prev;
             }
           });
-          break;
           setCurrentPage(1);
+          break;
         case "less-stars":
           setData((prev) => {
             if (prev) {
@@ -173,8 +184,70 @@ function FetchReposPage() {
     }
   };
 
+  const profileCardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        profileCardRef.current &&
+        !profileCardRef.current.contains(event.target as Node)
+      ) {
+        setShowProfile(false);
+      }
+    };
+
+    // Add event listener when the component mounts
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Remove event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileCardRef]);
+
+  const dropdownRef = useRef<HTMLLIElement | null>(null);
+  const subDropdownRef = useRef<HTMLUListElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        subDropdownRef.current &&
+        !subDropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownState(false);
+      }
+    };
+
+    // Add event listener when the component mounts
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Remove event listener when the component unmounts
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   return (
     <>
+      <AnimatePresence mode="wait">
+        {showProfile && (
+          <motion.section
+            className={styles.card_container}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              duration: 0.25,
+            }}
+          >
+            <div ref={profileCardRef}>
+              <ProfileCard />
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
       <main className={styles.wrapper}>
         <Navbar />
         <section className={styles.content}>
@@ -235,6 +308,7 @@ function FetchReposPage() {
                   onClick={() => {
                     setDropdownState((prev) => !prev);
                   }}
+                  ref={dropdownRef}
                 >
                   {langSettings.dropdown.one}
                   <div
@@ -250,6 +324,7 @@ function FetchReposPage() {
                 <ul
                   className={styles.search_sort_dropdown}
                   style={{ transform: dropdownState ? "scale(1)" : "scale(0)" }}
+                  ref={subDropdownRef}
                 >
                   <li
                     style={{
@@ -258,7 +333,7 @@ function FetchReposPage() {
                           ? "var(--dropdown-item-hover)"
                           : "",
                     }}
-                    onClick={() => handleSort("newest")}
+                    onClick={(event) => handleSort("newest", event)}
                   >
                     {langSettings.dropdown.two}
                   </li>
@@ -269,7 +344,7 @@ function FetchReposPage() {
                           ? "var(--dropdown-item-hover)"
                           : "",
                     }}
-                    onClick={() => handleSort("oldest")}
+                    onClick={(event) => handleSort("oldest", event)}
                   >
                     {langSettings.dropdown.three}
                   </li>
@@ -280,7 +355,7 @@ function FetchReposPage() {
                           ? "var(--dropdown-item-hover)"
                           : "",
                     }}
-                    onClick={() => handleSort("more-stars")}
+                    onClick={(event) => handleSort("more-stars", event)}
                   >
                     {langSettings.dropdown.four}
                   </li>
@@ -291,7 +366,7 @@ function FetchReposPage() {
                           ? "var(--dropdown-item-hover)"
                           : "",
                     }}
-                    onClick={() => handleSort("less-stars")}
+                    onClick={(event) => handleSort("less-stars", event)}
                   >
                     {langSettings.dropdown.five}
                   </li>
@@ -322,6 +397,7 @@ function FetchReposPage() {
                               alt="GitHub user profile image"
                               loading="lazy"
                               onLoad={handleImgLoad}
+                              onError={handleImgLoad}
                             />
                           </div>
                           <div className={styles.card_info}>
@@ -351,13 +427,14 @@ function FetchReposPage() {
                               >
                                 {langSettings.fetch.eleven}
                               </Link>
-                              <Link
-                                href={item.owner.html_url}
-                                target="_blank"
+                              <span
+                                onClick={() => {
+                                  setShowProfile(true);
+                                }}
                                 className={styles.card_link_profile}
                               >
                                 {langSettings.fetch.twelve}
-                              </Link>
+                              </span>
                             </div>
                           </div>
                         </div>
