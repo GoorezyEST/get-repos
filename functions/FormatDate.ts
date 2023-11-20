@@ -12,3 +12,9 @@ export function formatDateToCountryFormat(
   const formattedDate = new Intl.DateTimeFormat(locale, options).format(date);
   return formattedDate;
 }
+
+export function extractYearFromDate(dateString: string): string {
+  const date = new Date(dateString);
+  const year = date.getFullYear().toString();
+  return year;
+}
