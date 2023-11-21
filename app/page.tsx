@@ -2,7 +2,7 @@
 
 import { useGlobal } from "@/context/GlobalContext";
 import styles from "@/styles/modules/home.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import DecorativeSvg from "@/components/DecorativeSvg";
 import Navbar from "@/components/Units/Navbar";
 import SearchIconSvg from "@/components/SearchIconSvg";
@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import Footer from "@/components/Units/Footer";
 
 export default function Wrapper() {
-  const { setIsHydrated, setFetchUser, langSettings } = useGlobal();
+  const { setIsHydrated, setFetchUser, langSettings, device } = useGlobal();
 
   useEffect(() => {
     setIsHydrated(false);

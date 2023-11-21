@@ -16,6 +16,32 @@ export function GlobalProvider({ children }) {
   const [lang, setLang] = useState(null);
   //Show or hide overlay card for user profile details
   const [showProfile, setShowProfile] = useState(false);
+  //State to know if the device is or not mobile
+  const [device, setDevice] = useState(null);
+
+  useEffect(() => {
+    const handleOrientationChange = (event) => {
+      // Check if orientation is portrait
+      if (event.matches) {
+        setDevice(true);
+      } else {
+        setDevice(false);
+      }
+    };
+
+    // Check if the window object is available (client-side rendering)
+    if (typeof window !== "undefined") {
+      const portrait = window.matchMedia("(orientation: portrait)");
+      setDevice(portrait.matches); // Set initial value based on current orientation
+
+      portrait.addEventListener("change", handleOrientationChange);
+
+      return () => {
+        // Clean up the event listener when the component unmounts
+        portrait.removeEventListener("change", handleOrientationChange);
+      };
+    }
+  }, []);
 
   //Function to swap themes
   const handleThemeChange = () => {
@@ -66,6 +92,7 @@ export function GlobalProvider({ children }) {
         swapLanguage,
         showProfile,
         setShowProfile,
+        device,
       }}
     >
       {children}
