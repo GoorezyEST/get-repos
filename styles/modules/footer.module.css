@@ -54,3 +54,27 @@
   cursor: default;
   user-select: none;
 }
+
+@media screen and (max-width: 1367px) {
+  .inner_container {
+    padding: 48px 16px 36px 16px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .logo {
+    height: 36px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .inner_container > ul {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .inner_container > p {
+    font-size: 12px;
+    line-height: calc(12px * 1.575);
+  }
+}

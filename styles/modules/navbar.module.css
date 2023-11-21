@@ -62,3 +62,38 @@
   width: 100%;
   height: auto;
 }
+
+@media screen and (max-width: 1367px) {
+  .navbar {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .navbar {
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    border-bottom: 1px solid var(--primary-op);
+  }
+
+  .navbar_logo {
+    height: 36px;
+  }
+
+  .navbar_links {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .navbar_links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+}
