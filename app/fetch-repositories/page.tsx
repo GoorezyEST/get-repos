@@ -48,10 +48,15 @@ function FetchReposPage() {
 
   const [data, setData] = useState<GitHubRepository[] | null>(null);
   const [userExist, setUserExist] = useState<boolean>(true);
+  const [status, setStatus] = useState<number | null>(null);
 
   useEffect(() => {
     setIsHydrated(false);
     handleData();
+
+    return () => {
+      setFetchUser(null);
+    };
   }, []);
 
   useEffect(() => {
@@ -60,16 +65,23 @@ function FetchReposPage() {
 
   async function handleData() {
     if (fetchUser !== null) {
-      const response = retrieveUserRepositories(fetchUser);
-      if ((await response).length > 0) {
-        setUserExist(true);
-        setImgLoaded(false);
-        setData(await response);
-      } else {
-        setUserExist(false);
-        setImgLoaded(false);
-        reset();
-        setData(null);
+      try {
+        const response = await retrieveUserRepositories(fetchUser);
+
+        if (typeof response !== "number") {
+          setUserExist(true);
+          setImgLoaded(false);
+          setData(response);
+        } else {
+          setStatus(response);
+          setUserExist(false);
+          setImgLoaded(false);
+          reset();
+          setData(null);
+        }
+      } catch (error) {
+        // Handle other errors if needed
+        console.error("Error handling data:", error);
       }
     }
   }
@@ -86,6 +98,7 @@ function FetchReposPage() {
   const goToPrevPage = () => {
     if (data !== null) {
       setCurrentPage((prev) => Math.max(prev - 1, 1));
+      scrollTop();
     }
   };
 
@@ -94,7 +107,12 @@ function FetchReposPage() {
       setCurrentPage((prev) =>
         Math.min(prev + 1, Math.ceil(data.length / reposPerPage))
       );
+      scrollTop();
     }
+  };
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0 });
   };
 
   const [imgLoaded, setImgLoaded] = useState(true);
@@ -460,14 +478,7 @@ function FetchReposPage() {
               </div>
             ) : (
               <div className={styles.results_empty}>
-                {!userExist ? (
-                  <div className={styles.not_found}>
-                    <ErrorSvg />
-                    <p style={{ color: "var(--error)" }}>
-                      {langSettings.fetch.thirteen}
-                    </p>
-                  </div>
-                ) : (
+                {userExist && (
                   <div className={styles.welcome_text}>
                     <MessageSvg />
                     <p style={{ color: "var(--primary)" }}>
@@ -475,6 +486,23 @@ function FetchReposPage() {
                     </p>
                   </div>
                 )}
+                {!userExist && status === null && (
+                  <div className={styles.not_found}>
+                    <ErrorSvg />
+                    <p style={{ color: "var(--error)" }}>
+                      {langSettings.fetch.thirteen}
+                    </p>
+                  </div>
+                )}
+                {status === 403 ||
+                  (status === 500 && (
+                    <div className={styles.not_found}>
+                      <ErrorSvg />
+                      <p style={{ color: "var(--error)" }}>
+                        {langSettings.fetch.fifteen}
+                      </p>
+                    </div>
+                  ))}
               </div>
             )}
           </div>
