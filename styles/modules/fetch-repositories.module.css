@@ -151,6 +151,7 @@
   transform: scale(0);
   transform-origin: top center;
   transition: transform 200ms ease-in-out;
+  z-index: 200;
 }
 
 .search_sort_dropdown > li {
@@ -261,15 +262,18 @@
   height: 50px;
   position: relative;
   cursor: default;
+  border-radius: 50%;
   user-select: none;
 }
 
 .card_image img {
   width: 50px; /* Adjust the width as needed */
+  border-radius: 50%;
   height: 50px; /* Adjust the height as needed */
 }
 
 .card_image_loading {
+  border-radius: 50%;
   position: absolute;
   top: 0;
   left: 0;
@@ -452,4 +456,160 @@
   align-items: center;
   z-index: 1000;
   background-color: #23232360;
+}
+
+@media screen and (max-width: 1367px) {
+  .content {
+    padding: 0 16px;
+  }
+}
+
+@media screen and (max-width: 1128px) {
+  .search_main > h1 {
+    font-size: 36px;
+    line-height: calc(36px * 1.2);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .search_main > form > div > input {
+    width: 300px;
+  }
+
+  .results_cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 918px) {
+  .search_main > h1 {
+    font-size: 32px;
+    line-height: calc(32px * 1.2);
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .results_cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .search_sort > li {
+    padding: 12px 48px;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .search {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search > ul {
+    margin-top: 16px;
+  }
+
+  .search_main > h1 {
+    margin-bottom: 16px;
+  }
+
+  .search_main {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .not_found > svg,
+  .welcome_text > svg {
+    height: 32px;
+    width: auto;
+  }
+
+  .not_found > p,
+  .welcome_text > p {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .search_main > h1 {
+    font-size: 28px;
+    line-height: calc(28px * 1.2);
+  }
+
+  .search_main > form > label {
+    margin-bottom: 6px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .card_container {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .card {
+    padding: 10px;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .search_main > form > label {
+    font-size: 14px;
+  }
+
+  .search_main > form > div > input {
+    width: 250px;
+  }
+
+  .card_image {
+    width: 36px;
+    height: 36px;
+  }
+
+  .card_image img {
+    width: 36px; /* Adjust the width as needed */
+    height: 36px; /* Adjust the height as needed */
+  }
+
+  .card_image_loading {
+    width: 36px;
+    height: 36px;
+  }
+
+  .card_image_loading span {
+    width: 16px;
+    height: 16px;
+    border: 2px solid;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .search_main > h1 {
+    font-size: 24px;
+    line-height: calc(24px * 1.2);
+  }
+
+  .search_main > form > label {
+    font-size: 12px;
+  }
+
+  .search_main > form {
+    width: 100%;
+  }
+
+  .search_main > form > div {
+    width: 100%;
+  }
+
+  .search_main > form > div > input {
+    width: 100%;
+  }
+
+  .card_links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
