@@ -12,9 +12,12 @@ export interface GitHubRepository {
 }
 
 class RepositoriesRetrievalError extends Error {
-  constructor(message: string) {
+  status: number;
+
+  constructor(message: string, status: number) {
     super(message);
     this.name = "RepositoriesRetrievalError";
+    this.status = status;
   }
 }
 
@@ -26,7 +29,8 @@ export async function retrieveUserRepositories(username: string) {
 
     if (!response.ok) {
       throw new RepositoriesRetrievalError(
-        `Failed to retrieve repositories for user ${username}`
+        `Failed to retrieve repositories for user ${username}`,
+        500
       );
     }
 
@@ -42,7 +46,8 @@ export async function retrieveUserRepositories(username: string) {
   } catch (error) {
     if (error instanceof RepositoriesRetrievalError) {
       console.error(`Error retrieving user repositories: ${error.message}`);
-      return [];
+      const status = error.status;
+      return status;
     } else {
       console.error(`Unexpected error: ${error}`);
       return [];
