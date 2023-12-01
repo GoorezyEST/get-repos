@@ -117,7 +117,7 @@
 }
 
 .search_sort > li {
-  color: var(--background);
+  color: #fbfbfb;
   width: 100%;
   text-align: center;
   font-size: 16px;
@@ -164,10 +164,6 @@
   cursor: pointer;
   user-select: none;
   transition: background-color 200ms ease-in-out;
-}
-
-.search_sort_dropdown > li:hover {
-  background-color: var(--dropdown-item-hover);
 }
 
 .search_sort_dropdown > li:first-child {
@@ -267,9 +263,11 @@
 }
 
 .card_image img {
+  position: absolute;
   width: 50px; /* Adjust the width as needed */
   border-radius: 50%;
   height: 50px; /* Adjust the height as needed */
+  z-index: 75;
 }
 
 .card_image_loading {

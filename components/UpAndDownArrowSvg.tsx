@@ -11,7 +11,7 @@ function UpAndDownArrowSvg() {
     >
       <path
         d="M12 4V20M12 4L8 8M12 4L16 8"
-        stroke="var(--background)"
+        stroke="#fbfbfb"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

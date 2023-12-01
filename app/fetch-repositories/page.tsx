@@ -404,18 +404,10 @@ function FetchReposPage() {
                       return (
                         <div key={index} className={styles.card}>
                           <div className={styles.card_image}>
-                            <div
-                              className={styles.card_image_loading}
-                              style={{ opacity: imgLoaded ? "0" : "1" }}
-                            >
-                              <span></span>
-                            </div>
                             <img
                               src={item.owner.avatar_url}
                               alt="GitHub user profile image"
                               loading="lazy"
-                              onLoad={handleImgLoad}
-                              onError={handleImgLoad}
                             />
                           </div>
                           <div className={styles.card_info}>
