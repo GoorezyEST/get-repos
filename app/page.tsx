@@ -56,7 +56,7 @@ export default function Wrapper() {
                     errors.username?.type === "required" ||
                     errors.username?.type === "pattern"
                       ? "var(--error)"
-                      : "var(--accent)",
+                      : "var(--primary)",
                 }}
               >
                 {errors.username?.type === "required" && langSettings.home.five}

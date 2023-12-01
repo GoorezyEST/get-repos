@@ -59,7 +59,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: calc(16px * 1.2);
-  color: var(--accent);
+  color: var(--primary);
   margin-bottom: 16px;
 }
 
@@ -207,6 +207,25 @@
 .welcome_text > svg {
   height: 64px;
   width: auto;
+  animation: slowUpNDown 3000ms linear infinite;
+}
+
+@keyframes slowUpNDown {
+  0% {
+    transform: translateY(4px);
+  }
+  25% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+  75% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(4px);
+  }
 }
 
 .not_found > p,

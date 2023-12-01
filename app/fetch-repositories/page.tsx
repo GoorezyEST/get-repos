@@ -287,7 +287,7 @@ function FetchReposPage() {
                       errors.username?.type === "required" ||
                       errors.username?.type === "pattern"
                         ? "var(--error)"
-                        : "var(--accent)",
+                        : "var(--primary)",
                   }}
                 >
                   {errors.username?.type === "required" &&
@@ -478,18 +478,13 @@ function FetchReposPage() {
                     </p>
                   </div>
                 )}
-                {!userExist && status === null && (
-                  <div className={styles.not_found}>
-                    <ErrorSvg />
-                    <p style={{ color: "var(--error)" }}>
-                      {langSettings.fetch.thirteen}
-                    </p>
-                  </div>
-                )}
                 {status === 403 ||
                   (status === 500 && (
                     <div className={styles.not_found}>
                       <ErrorSvg />
+                      <p style={{ color: "var(--error)" }}>
+                        {langSettings.fetch.thirteen}
+                      </p>
                       <p style={{ color: "var(--error)" }}>
                         {langSettings.fetch.fifteen}
                       </p>

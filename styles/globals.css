@@ -11,7 +11,7 @@
   --background-op: #fbfbfb60;
   --primary: #232323;
   --primary-op: #23232360;
-  --accent: #325dd2;
+  --accent: #3a63d4;
   --accent-darker: #2d57c9;
   --error: #ff4d4d;
 
@@ -25,6 +25,7 @@
   --primary-op: #fbfbfb60;
 
   --dropdown-item: #fbfbfb;
+  --dropdown-item-hover: #ececec;
 }
 
 body {

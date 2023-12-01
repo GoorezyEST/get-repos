@@ -34,7 +34,7 @@ export const Language = {
       twelve: "See profile",
       thirteen: "The username you entered does not exist!",
       fourteen: "Here you'll see the repositories of the user!",
-      fifteen: "You have exceeded the limit of 60 requests per hour.",
+      fifteen: "Or maybe you exceeded the limit of 60 requests per hour.",
     },
     dropdown: {
       one: "Filters",
@@ -89,7 +89,7 @@ export const Language = {
       twelve: "Ver perfil",
       thirteen: "¡El nombre de usuario ingresado no existe!",
       fourteen: "¡Aqui verás los repositorios del usuario!",
-      fifteen: "Haz superado el limite de 60 solicitudes por hora.",
+      fifteen: "O superaste el limite de 60 solicitudes por hora.",
     },
     dropdown: {
       one: "Filtros",
