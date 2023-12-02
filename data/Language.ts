@@ -35,6 +35,7 @@ export const Language = {
       thirteen: "The username you entered does not exist!",
       fourteen: "Here you'll see the repositories of the user!",
       fifteen: "Or maybe you exceeded the limit of 60 requests per hour.",
+      sixteen: "This user doesn't have any public repositories",
     },
     dropdown: {
       one: "Filters",
@@ -90,6 +91,7 @@ export const Language = {
       thirteen: "¡El nombre de usuario ingresado no existe!",
       fourteen: "¡Aqui verás los repositorios del usuario!",
       fifteen: "O superaste el limite de 60 solicitudes por hora.",
+      sixteen: "Este usuario no tiene repositorios publicos",
     },
     dropdown: {
       one: "Filtros",
