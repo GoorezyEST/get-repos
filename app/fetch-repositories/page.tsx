@@ -470,7 +470,15 @@ function FetchReposPage() {
               </div>
             ) : (
               <div className={styles.results_empty}>
-                {userExist && (
+                {data && data?.length < 1 && userExist && (
+                  <div className={styles.not_found}>
+                    <ErrorSvg />
+                    <p style={{ color: "var(--error)" }}>
+                      {langSettings.fetch.sixteen}
+                    </p>
+                  </div>
+                )}
+                {!data && userExist && (
                   <div className={styles.welcome_text}>
                     <MessageSvg />
                     <p style={{ color: "var(--primary)" }}>
@@ -478,8 +486,8 @@ function FetchReposPage() {
                     </p>
                   </div>
                 )}
-                {status === 403 ||
-                  (status === 500 && (
+                {(!data && status === 403) ||
+                  (!data && status === 500 && (
                     <div className={styles.not_found}>
                       <ErrorSvg />
                       <p style={{ color: "var(--error)" }}>
