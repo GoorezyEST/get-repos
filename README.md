@@ -6,6 +6,8 @@ Con esta aplicación web podrás ingresar el nombre de un usuario de GitHub y as
 
 Esta aplicación funciona gracias a la **API de GitHub.**
 
+Nota: Esta API tiene un limite de 60 solicitudes por hora.
+
 ## Dependencias:
 
 - next: 14.0.1
